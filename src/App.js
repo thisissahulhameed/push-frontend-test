@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { registerSW, subscribe } from "./helper";
 
 function App() {
+  const registerAndSubscribeSM = async () => {
+    try {
+      const serviceWorkerRegistration = await registerSW();
+      subscribe(serviceWorkerRegistration);
+    } catch (err) {
+      console.log(err, "error in sw while register and subscribe");
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Push notification</h1>
+      <button onClick={registerAndSubscribeSM}>Enable subscription</button>
     </div>
   );
 }
